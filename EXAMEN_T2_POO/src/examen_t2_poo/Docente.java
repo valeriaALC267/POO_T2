@@ -2,6 +2,7 @@
 package examen_t2_poo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public abstract class Docente 
 {
@@ -11,8 +12,11 @@ public abstract class Docente
     protected String tipo_doc;
     protected String nro_doc;
     protected String direccion;
-    protected int telefono;
+    protected String telefono;
     protected LocalDate fecha_ingreso;
+    protected DepartamentoAcademico departamento_actual;
+    protected SistemaPensionario sistema_pension;
+    protected ArrayList<MovimientoDepartamento> ListaMovimientos = new ArrayList<>();
 
     public Docente() {
     }
@@ -110,19 +114,23 @@ public abstract class Docente
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono)
+    public void setTelefono(String telefono)
     {
-         if(telefono == 0)
+         if(telefono == null || telefono.isEmpty())
         {
             throw new IllegalArgumentException("Error: Debe llenar este campo primero. Intente nuevamente:");
         }
-        if(String.valueOf(telefono).length()!=9)
+        if(this.telefono.trim().length()!=9)
         {
             throw new IllegalArgumentException("Error: El numero de telefono debe tener obligatoriamente 9 digitos. Intente nuevamente:");
+        }
+        if(!telefono.trim().startsWith("9"))
+        {
+            throw new IllegalArgumentException("Error: El telefono debe empezar con '9'. Intente nuevamente:");
         }
         this.telefono = telefono;
     }
@@ -139,6 +147,69 @@ public abstract class Docente
         }
         this.fecha_ingreso = fecha_ingreso;
     }
+
+    public DepartamentoAcademico getDepartamento_actual() {
+        return departamento_actual;
+    }
+
+    public void setDepartamento_actual(DepartamentoAcademico departamento_actual) 
+    {
+        if(departamento_actual == null)
+        {
+            throw new IllegalArgumentException("Error: Debe asignar este campo obligatoriamente. Intente nuevamente:");
+        }
+        this.departamento_actual = departamento_actual;
+    }
+
+    public SistemaPensionario getSistema_pension() {
+        return sistema_pension;
+    }
+
+    public void setSistema_pension(SistemaPensionario sistema_pension) 
+    {
+        if(sistema_pension == null)
+        {
+            throw new IllegalArgumentException("Error: Debe asignar este campo obligatoriamente. Intente nuevamente:");
+        }
+        this.sistema_pension = sistema_pension;
+    }
+    public void AsignarNuevoDepartamento(DepartamentoAcademico nuevo_dep, LocalDate fecha_nuevo_mov)
+    {
+        if(nuevo_dep == null || fecha_nuevo_mov == null)
+        {
+            throw new IllegalArgumentException("Error: Debe asignar estos datos correctamente. Intente de nuevo:");
+        }
+        if(this.fecha_ingreso != null && fecha_nuevo_mov.isBefore(fecha_ingreso))
+        {
+            throw new IllegalArgumentException("Error: La fecha de movimiento no debe ser anterior a la de ingreso. Intente nuevamente:");
+        }
+        if(!ListaMovimientos.isEmpty())
+        {
+            MovimientoDepartamento ultimoMovimiento = ListaMovimientos.get(ListaMovimientos.size()-1);
+            ultimoMovimiento.setFecha_fin(fecha_nuevo_mov);
+        }
+        MovimientoDepartamento nuevoMovimiento = new MovimientoDepartamento();
+        nuevoMovimiento.setDepartamento(nuevo_dep);
+        nuevoMovimiento.setFecha_inicio(fecha_nuevo_mov);
+        
+        ListaMovimientos.add(nuevoMovimiento);
+        this.departamento_actual = nuevo_dep;
+    }
+    public String MostrarHistorialMov()
+    {
+        if(this.ListaMovimientos.isEmpty())
+        {
+            return "Este docente aun no tiene movimientos/rotaciones registrados.";
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("----------------HISTORIAL MOVIMIENTOS--------------------\n");
+        for(MovimientoDepartamento md : ListaMovimientos)
+        {
+            sb.append(md.MostrarDatosMovimiento()).append("\n");
+        }
+        return sb.toString();
+    }
     public abstract String MostrarDatosDocente();
-    public abstract String MostrarSuedoNeto();
+    public abstract String MostrarSueldoNeto();
 }

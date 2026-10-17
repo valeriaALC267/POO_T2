@@ -56,7 +56,8 @@ public class Docente_Tiempo_Completo extends Docente
     {
         return "NOMBRE: "+this.nombre+" | APELLIDO PAT: "+this.apellido_p+" | APELLIDO MAT: "+this.apellido_m+" | TIPO DOC: "+this.tipo_doc+" | NRO DOC: "+this.nro_doc
                 +" | DIRECCION: "+this.direccion+" | TELEFONO: "+this.telefono+" | FECHA INGRESO: "+this.fecha_ingreso+" | SUELDO FIJO: "+this.sueldo_fijo
-                +" | NRO TARDANZAS: "+this.tardanzas+" | NRO INASISTENCIAS: "+this.inasistencias;
+                +" | NRO TARDANZAS: "+this.tardanzas+" | NRO INASISTENCIAS: "+this.inasistencias
+                +" | DEPARTAMENTO ACTUAL: "+this.departamento_actual.getNombre_departamento()+" | SISTEMA PENSIONARIO: "+this.sistema_pension.name();
     }
     public double CalcularSueldoNeto()
     {
@@ -65,7 +66,7 @@ public class Docente_Tiempo_Completo extends Docente
     }
 
     @Override
-    public String MostrarSuedoNeto() 
+    public String MostrarSueldoNeto() 
     {
         return "SUELDO NETO: s/"+CalcularSueldoNeto();
     }

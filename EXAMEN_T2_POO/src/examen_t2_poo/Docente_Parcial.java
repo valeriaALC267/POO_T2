@@ -40,7 +40,8 @@ public class Docente_Parcial extends Docente
     {
         return "NOMBRE: "+this.nombre+" | APELLIDO PAT: "+ this.apellido_p+" | APELLIDO MAT: "+this.apellido_m+" | TIPO DOC: "+this.tipo_doc+
          " | NRO DOC: "+this.nro_doc+" | DIRECCION: "+this.direccion+" | TELEFONO: "+this.telefono+" | FECHA INGRESO: "
-                +this.fecha_ingreso+" | HORAS DICTADAS: "+this.horas_dictadas+" | TARIFA HORA: S/"+this.tarifa_hora;
+                +this.fecha_ingreso+" | HORAS DICTADAS: "+this.horas_dictadas+" | TARIFA HORA: S/"+this.tarifa_hora
+                +" | DEPARTAMENTO ACTUAL: "+this.departamento_actual.getNombre_departamento()+" | SISTEMA PENSIONARIO: "+this.sistema_pension.name();
     }
     public double SueldoCalculado()
     {
@@ -48,7 +49,7 @@ public class Docente_Parcial extends Docente
     }
 
     @Override
-    public String MostrarSuedoNeto() 
+    public String MostrarSueldoNeto() 
     {
         return "SUELDO NETO: S/"+SueldoCalculado();
     }
