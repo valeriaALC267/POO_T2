@@ -35,6 +35,7 @@ public class DocenteController
         {
             System.out.println(dc.MostrarDatosDocente());
             System.out.println(dc.MostrarSueldoNeto());
+            System.out.println(dc.MostrarHistorialMov());
         }
     }
 }

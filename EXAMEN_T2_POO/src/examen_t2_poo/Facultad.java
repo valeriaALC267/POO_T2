@@ -28,7 +28,7 @@ public class Facultad
 
     public void setCodigo_facultad(String codigo_facultad)
     {
-        if(codigo_facultad == null || codigo_facultad.trim().isEmpty() || codigo_facultad.length()<2)
+        if(codigo_facultad == null || codigo_facultad.trim().isEmpty() || codigo_facultad.length()!=3)
         {
             throw new IllegalArgumentException("Error: Debe llenar este campo con informacion valida. Intente nuevamente:");
         }

@@ -21,6 +21,10 @@ public class DepartamentoController
         }
         return null;
     }
+    public Boolean EstaVacia()
+    {
+        return ListaDepartamento.isEmpty();
+    }
     public void AgregarDepartamento(DepartamentoAcademico dp)
     {
         if(BuscaDepartamento(dp.getCodigo_departamento()) == null)

@@ -28,6 +28,10 @@ public class FacultadController
             ListaFacultades.add(f);
         }
     }
+    public Boolean EstaVacia()
+    {
+        return ListaFacultades.isEmpty();
+    }
     public void ListarFacultades()
     {
         for(Facultad fc : ListaFacultades)

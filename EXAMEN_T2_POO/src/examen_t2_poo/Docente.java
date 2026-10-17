@@ -124,7 +124,7 @@ public abstract class Docente
         {
             throw new IllegalArgumentException("Error: Debe llenar este campo primero. Intente nuevamente:");
         }
-        if(this.telefono.trim().length()!=9)
+        if(telefono.trim().length()!=9)
         {
             throw new IllegalArgumentException("Error: El numero de telefono debe tener obligatoriamente 9 digitos. Intente nuevamente:");
         }
